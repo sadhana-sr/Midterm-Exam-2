@@ -13,8 +13,7 @@ export function Problem () {
     let [clicks, setClicks] = useState(0);
     let [plural, setPlural] = useState('s')
     
-    let [clicks_string, SAVED_CLICKS_KEY] = useState('')
-
+    const SAVED_CLICKS_KEY = '0'
     function clickCounts(){
         clicks++;
         setClicks(clicks);
@@ -25,8 +24,7 @@ export function Problem () {
             plural='s'
             setPlural(plural)
         }
-        clicks_string=JSON.stringify(clicks);
-        SAVED_CLICKS_KEY(clicks_string);
+        localStorage.setItem(SAVED_CLICKS_KEY,JSON.stringify(clicks))
     }
     
     function reset(){
@@ -39,15 +37,12 @@ export function Problem () {
             plural='s'
             setPlural(plural)
         }
-        clicks_string=JSON.stringify(clicks);
-        SAVED_CLICKS_KEY(clicks_string);
+        localStorage.setItem(SAVED_CLICKS_KEY,JSON.stringify(clicks))
     }
 
-    localStorage.setItem(SAVED_CLICKS_KEY, clicks_string);
-    console.log(localStorage.getItem(SAVED_CLICKS_KEY));
 
     return <div className="btn-group">
-            <button className="btn btn-primary" onClick={clickCounts}>Clicked {clicks} time{plural}</button>
+            <button className="btn btn-primary" onClick={clickCounts}>Clicked {localStorage.getItem(SAVED_CLICKS_KEY)} time{plural}</button>
             <button className="btn btn-secondary" onClick={reset}>Reset</button>
         </div>;
     ;
